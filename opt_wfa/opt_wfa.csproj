@@ -65,7 +65,7 @@
     <Compile Include="Methods\Gen\GenFactory\IInvertion.cs" />
     <Compile Include="Methods\Gen\GenFactory\IMutation.cs" />
     <Compile Include="Methods\Gen\GenFactory\GenFactory.cs" />
-    <Compile Include="Methods\Gen\GenFactory\IGenOperator.cs" />
+    <Compile Include="Methods\Gen\GenUnits\IGenOperator.cs" />
     <Compile Include="Methods\Gen\GenOperators\GenOperatorBase.cs" />
     <Compile Include="Methods\Gen\GenOperators\Mutation.cs" />
     <Compile Include="Methods\Gen\GenOperators\Invertion.cs" />

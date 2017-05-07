@@ -2,7 +2,7 @@
 using opt_wfa.Methods.Gen.GenUnits;
 using System;
 
-namespace opt_wfa.Methods.Gen.GenFactory
+namespace opt_wfa.Methods.Gen.GenUnits
 {
   
   public interface IGenOperator

@@ -1,11 +1,12 @@
 ﻿using opt_wfa.Methods.Gen.GenFactory;
+using opt_wfa.Methods.Gen.GenUnits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace opt_wfa.Methods.Gen.GenOperators
+namespace opt_wfa.Methods.Gen.GenFactory
 {
     public class GenOperatorBase
     {

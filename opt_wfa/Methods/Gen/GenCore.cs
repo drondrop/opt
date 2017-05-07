@@ -1,7 +1,6 @@
 ﻿using opt_wfa.Data_Types;
 using opt_wfa.Factory;
 using opt_wfa.Methods.Gen.GenFactory;
-using opt_wfa.Methods.Gen.GenOperators;
 using opt_wfa.Methods.Gen.GenUnits;
 using System;
 using System.Collections.Generic;
@@ -39,7 +38,7 @@ namespace opt_wfa.Methods.Gen
                     new Vector(_func.arguments, _random, 20))));
             }
             this._GenWorker = new GenWorker(_random, _Pm, this._GF);
-            _currentPopulation = new Population(fens, this._GF);
+            _currentPopulation = new Population(fens, this._GenWorker);
         }
         public Vector Run()
         {
@@ -88,11 +87,11 @@ namespace opt_wfa.Methods.Gen
         {
             
             double avgStrongest = avg * 2;
-            Population strongest = new Population(this._GF);
+            Population strongest = new Population(this._GenWorker);
            
             while (avgStrongest > avg)
             {
-                strongest = new Population(this._GF);
+                strongest = new Population(this._GenWorker);
                 while (strongest.population.Count < allPopulation.population.Count / 2)
                 {
                     var ind = Tournament(allPopulation);
@@ -112,8 +111,8 @@ namespace opt_wfa.Methods.Gen
         }
         private Individual Tournament(Population allPopulation)
         {
-            Population turnirSet = new Population(this._GF);
-
+            Population turnirSet = new Population(this._GenWorker   );
+            
             int tcount = 2;
             int i = 0;
             while (turnirSet.population.Count < tcount)

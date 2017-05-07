@@ -1,6 +1,7 @@
 ﻿using opt_wfa.Methods.Gen.GenFactory;
+using opt_wfa.Methods.Gen.GenUnits;
 
-namespace opt_wfa.Methods.Gen.GenOperators
+namespace opt_wfa.Methods.Gen.GenFactory
 {
     
     public class ConcreteInvertion :GenOperatorBase, IInvertion

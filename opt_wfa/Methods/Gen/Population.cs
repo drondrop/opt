@@ -1,12 +1,8 @@
 ﻿using opt_wfa.Data_Types;
-using opt_wfa.Methods.Gen.GenFactory;
-using opt_wfa.Methods.Gen.GenOperators;
 using opt_wfa.Methods.Gen.GenUnits;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace opt_wfa.Methods.Gen
 {
@@ -22,15 +18,15 @@ namespace opt_wfa.Methods.Gen
             _population.AddRange(collection);
         }
 
-        public Population(gFactory fc)
+        public Population(GenWorker fc)
         {
-            _GenWorker=new GenWorker(new RandomHelper(), 0.1,fc);
+            _GenWorker=fc;
             _population = new List<Individual>();
         }
 
-        public Population(List<Individual> _population, gFactory fc)
+        public Population(List<Individual> _population, GenWorker fc)
         {
-            _GenWorker = new GenWorker(new RandomHelper(), 0.1, fc);
+            _GenWorker = fc;
             this._population = _population;
         }
         public Population(Population Population)
