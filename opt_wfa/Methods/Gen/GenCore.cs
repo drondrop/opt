@@ -1,6 +1,8 @@
 ﻿using opt_wfa.Data_Types;
 using opt_wfa.Factory;
+using opt_wfa.Methods.Gen.GenFactory;
 using opt_wfa.Methods.Gen.GenOperators;
+using opt_wfa.Methods.Gen.GenUnits;
 using System;
 using System.Collections.Generic;
 using System.Linq;

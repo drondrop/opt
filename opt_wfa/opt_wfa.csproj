@@ -61,11 +61,20 @@
     </Compile>
     <Compile Include="Methods\ComboLine\Combo_LineSeach.cs" />
     <Compile Include="Methods\ComboLine\IM8_Combo_LineSeach.cs" />
-    <Compile Include="Methods\Gen\GenOperators\Class1.cs" />
-    <Compile Include="Methods\Gen\GenOperators\IMutation.cs" />
-    <Compile Include="Methods\Gen\GenOperators\IInvertion.cs" />
+    <Compile Include="Methods\Gen\GenFactory\ICrossover.cs" />
+    <Compile Include="Methods\Gen\GenFactory\IInvertion.cs" />
+    <Compile Include="Methods\Gen\GenFactory\IMutation.cs" />
+    <Compile Include="Methods\Gen\GenFactory\GenFactory.cs" />
+    <Compile Include="Methods\Gen\GenFactory\IGenOperator.cs" />
+    <Compile Include="Methods\Gen\GenOperators\GenOperatorBase.cs" />
+    <Compile Include="Methods\Gen\GenOperators\Mutation.cs" />
+    <Compile Include="Methods\Gen\GenOperators\Invertion.cs" />
+    <Compile Include="Methods\Gen\GenUnits\GenoTypeDouble.cs" />
+    <Compile Include="Methods\Gen\GenUnits\GenoTypeInt.cs" />
+    <Compile Include="Methods\Gen\GenUnits\Individual.cs" />
+    <Compile Include="Methods\Gen\GenUnits\GenoType.cs" />
     <Compile Include="Methods\Gen\GenWorker.cs" />
-    <Compile Include="Methods\Gen\GenOperators\ICrossover.cs" />
+    <Compile Include="Methods\Gen\GenOperators\Crossover.cs" />
     <Compile Include="Methods\Gen\Population.cs" />
     <Compile Include="Methods\Gen\GenCore.cs" />
     <Compile Include="Methods\Gen\Individual.cs" />

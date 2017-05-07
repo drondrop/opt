@@ -1,16 +1,10 @@
 ﻿using opt_wfa.Data_Types;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using opt_wfa.Methods.Gen.GenFactory;
+using opt_wfa.Methods.Gen.GenUnits;
 
 namespace opt_wfa.Methods.Gen.GenOperators
 {
-    public interface IMutation
-    {
-        void Mutation(ref Individual individual, RandomHelper rnd);
-    }
+    
     public class Mutation1 : GenOperatorBase,IMutation
     {
         private double _Pm = 0.045;
