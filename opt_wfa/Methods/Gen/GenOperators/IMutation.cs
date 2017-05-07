@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace opt_wfa.Methods.Gen.GenOperators
 {
-    interface IMutation
+    public interface IMutation
     {
         void Mutation(ref Individual individual, RandomHelper rnd);
     }
     public class Mutation1 : GenOperatorBase,IMutation
     {
         private double _Pm = 0.045;
-        public Mutation1(double _Pm)
+        public Mutation1(double _Pm, IGenOperator _op)
+            : base(_op)
         {
             // TODO: Complete member initialization
             this._Pm = _Pm;

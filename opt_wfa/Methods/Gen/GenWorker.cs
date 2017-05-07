@@ -8,13 +8,13 @@ namespace opt_wfa.Methods.Gen
     public class GenWorker
     {
         ICrossover _implcrossover;
-        Mutation1 _implmutation;
+        IMutation _implmutation;
         IInvertion _implIInvertion;
         private RandomHelper _random;
-        public GenWorker(RandomHelper _random, double _Pm)
+        public GenWorker(RandomHelper _random, double _Pm,gFactory fc)
         {
-            _implcrossover = new CrossoverOnePoint();
-            _implmutation = new Mutation1(_Pm);
+            _implcrossover = fc.GetCrossoverImplementation(gFactory.CrossoverType.OnePoint);//(//new CrossoverOnePoint();
+            _implmutation =fc.GetMutationImplementation(gFactory.MutationType.Default);// new Mutation1(_Pm);
             this._random = _random;
         }
         public void Crossover(ref Individual Parent1, ref Individual Parent2)

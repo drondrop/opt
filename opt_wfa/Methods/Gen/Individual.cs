@@ -12,7 +12,7 @@ namespace opt_wfa.Methods.Gen
         public Individual(GenoType _GenoType)
         {
             // this._phenotype = _phenotype;
-            this._genotype = _GenoType;
+            this._genotype =  _GenoType.Clone();
         }
         public double fitness { get { return _fitness; } set { _fitness = value; } }
         public Vector Phenotype
@@ -40,7 +40,7 @@ namespace opt_wfa.Methods.Gen
     {
          Vector GetPhenoType();
          int length { get; }
-         
+         GenoType Clone();
 
     }
     public class GenoTypeInt : GenoType
@@ -52,12 +52,26 @@ namespace opt_wfa.Methods.Gen
             return new Vector(genoType.Count);
         }
         public int length { get { return genoType.Count; } }
+
+
+        public GenoType Clone(GenoType old)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public GenoType Clone()
+        {
+            throw new NotImplementedException();
+        }
     }
     public class GenoTypeDouble : GenoType
     {
 
+
         List<double> genoType ;
         int phenLength;
+        int mult = 12;
         public GenoTypeDouble(double [] massIn)
         { 
             this.phenLength = massIn.Length;
@@ -80,22 +94,22 @@ namespace opt_wfa.Methods.Gen
             double[] massOut = new double[phenLength];
             for (int i = 0; i < phenLength; i++)
             {
-                for (int j = 0; j < 12; j++)
+                for (int j = 0; j < mult; j++)
                 {
-                    massOut[i] += genoType[i * 12 + j];
+                    massOut[i] += genoType[i * mult + j];
                 }
-                massOut[i] /= 12.0;
+                massOut[i] /= mult;
             }
             return massOut;
         }
         private void Coder(double[] massIn)
         {
-            int count = phenLength * 12;
+            int count = phenLength * mult;
             genoType = new List<double>();//new Vector((_phenotype.length * 12));
 
             for (int i = 0; i < phenLength; i++)
             {
-                for (int j = 0; j < 12;j++ )
+                for (int j = 0; j < mult; j++)
                 {
                     genoType.Add( massIn[i]);
                 }
@@ -104,6 +118,12 @@ namespace opt_wfa.Methods.Gen
         }
 
 
+
+
+        public GenoType Clone()
+        {
+            return new GenoTypeDouble(this.Decoder());
+        }
     }
     public class converter
     {

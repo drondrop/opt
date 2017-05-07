@@ -27,7 +27,7 @@ namespace opt_wfa.Methods.Gen
         {
             this._func = _func;
             _random = new RandomHelper();
-            this._GenWorker = new GenWorker(_random, _Pm);
+            
             //this._PopulationWorker = new PopulationWorker(_random, this._GenWorker, this._Pc);
             List<Individual> fens = new List<Individual>();
             this._GF = new gFactory(gFactory.GenType.Real);
@@ -36,8 +36,8 @@ namespace opt_wfa.Methods.Gen
                 fens.Add(new Individual(this._GF.GetGenoTypeImplementation(
                     new Vector(_func.arguments, _random, 20))));
             }
-
-            _currentPopulation = new Population(fens);
+            this._GenWorker = new GenWorker(_random, _Pm, this._GF);
+            _currentPopulation = new Population(fens, this._GF);
         }
         public Vector Run()
         {
@@ -86,11 +86,11 @@ namespace opt_wfa.Methods.Gen
         {
             
             double avgStrongest = avg * 2;
-            Population strongest = new Population();
+            Population strongest = new Population(this._GF);
            
             while (avgStrongest > avg)
             {
-                strongest = new Population();
+                strongest = new Population(this._GF);
                 while (strongest.population.Count < allPopulation.population.Count / 2)
                 {
                     var ind = Tournament(allPopulation);
@@ -110,7 +110,7 @@ namespace opt_wfa.Methods.Gen
         }
         private Individual Tournament(Population allPopulation)
         {
-            Population turnirSet = new Population();
+            Population turnirSet = new Population(this._GF);
 
             int tcount = 2;
             int i = 0;

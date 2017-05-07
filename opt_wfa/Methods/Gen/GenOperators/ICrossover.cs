@@ -9,19 +9,17 @@ namespace opt_wfa.Methods.Gen.GenOperators
 {
     
 
-    interface ICrossover
+    public interface ICrossover
     {
         void Crossover(ref Individual A, ref Individual B, RandomHelper rnd);
     }
 
-    public static class ICrossoverFactory
-    {
-        
-    }
+    
 
 
     public class CrossoverOnePoint :GenOperatorBase, ICrossover
     {
+        public CrossoverOnePoint(IGenOperator _op) : base(_op) { }
         public void Crossover(ref Individual A, ref Individual B, RandomHelper rnd)
         {
            // int gensLength = A.GenotypeLength;
@@ -33,6 +31,7 @@ namespace opt_wfa.Methods.Gen.GenOperators
     }
     public class CrossoverTwoPoint :GenOperatorBase, ICrossover
     {
+        public CrossoverTwoPoint(IGenOperator _op) : base(_op) { }
         public void Crossover(ref Individual A, ref Individual B, RandomHelper rnd)
         {
 

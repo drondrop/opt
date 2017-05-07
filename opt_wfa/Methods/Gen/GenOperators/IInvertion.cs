@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace opt_wfa.Methods.Gen.GenOperators
 {
-    interface IInvertion
+    public  interface IInvertion
     {
 
     }
     public class ConcreteInvertion :GenOperatorBase, IInvertion
     {
-
+        public ConcreteInvertion(IGenOperator _op) : base(_op) { }
     }
 }

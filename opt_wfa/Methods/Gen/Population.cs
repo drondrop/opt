@@ -10,7 +10,7 @@ namespace opt_wfa.Methods.Gen
 {
     public class Population
     {
-        GenWorker _GenWorker=new GenWorker(new RandomHelper(), 0.1);
+        GenWorker _GenWorker;//=new GenWorker(new RandomHelper(), 0.1);
         public void Add(Individual item)
         {
             _population.Add(item);
@@ -20,17 +20,20 @@ namespace opt_wfa.Methods.Gen
             _population.AddRange(collection);
         }
 
-        public Population()
+        public Population(gFactory fc)
         {
+            _GenWorker=new GenWorker(new RandomHelper(), 0.1,fc);
             _population = new List<Individual>();
         }
 
-        public Population(List<Individual> _population)
+        public Population(List<Individual> _population, gFactory fc)
         {
+            _GenWorker = new GenWorker(new RandomHelper(), 0.1, fc);
             this._population = _population;
         }
         public Population(Population Population)
         {
+            _GenWorker = Population._GenWorker;
             this._population = Population.population;
         }
 
