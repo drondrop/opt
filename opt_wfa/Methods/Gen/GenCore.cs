@@ -1,7 +1,7 @@
 ﻿using opt_wfa.Data_Types;
 using opt_wfa.Factory;
 using opt_wfa.Methods.Gen.GenFactory;
-using opt_wfa.Methods.Gen.GenUnits;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +16,7 @@ namespace opt_wfa.Methods.Gen
        // private PopulationWorker _PopulationWorker;
         private double _Pm = 0.1;
         private double _Pc = 0.7;
-        private double _Pi = 0.05;
+        private double _Pi = 0.0;
         private int _populationLength = 100;
         private Population _currentPopulation;
         private int N_Populations = 100;
@@ -28,7 +28,7 @@ namespace opt_wfa.Methods.Gen
         {
             this._func = _func;
             _random = new RandomHelper();
-            
+
             //this._PopulationWorker = new PopulationWorker(_random, this._GenWorker, this._Pc);
             List<Individual> fens = new List<Individual>();
             this._GF = new gFactory(gFactory.GenType.Real);
@@ -37,10 +37,16 @@ namespace opt_wfa.Methods.Gen
                 fens.Add(new Individual(this._GF.GetGenoTypeImplementation(
                     new Vector(_func.arguments, _random, 20))));
             }
-            this._GenWorker = new GenWorker(_random, _Pm, this._GF);
+            this._GenWorker = new GenWorker
+                (
+                 this._GF.GetCrossoverImplementation(gFactory.CrossoverType.OnePoint),
+                 this._GF.GetMutationImplementation(gFactory.MutationType.Default, this._Pm),
+                 this._GF.GetInvertionImplementation(gFactory.InvertionType.Default, this._Pi),
+                 this._random
+                );
             _currentPopulation = new Population(fens, this._GenWorker);
         }
-        public Vector Run()
+        public int  Run(ref Vector X )
         {
             int knot = 0;
             int k = 0;
@@ -81,7 +87,8 @@ namespace opt_wfa.Methods.Gen
 
                 k++;
             }
-            return _currentPopulation.population[minmax.A].Phenotype;
+            X=_currentPopulation.population[minmax.A].Phenotype;
+            return k;
         }
         private Population Selection(Population allPopulation, double avg)
         {
@@ -113,7 +120,7 @@ namespace opt_wfa.Methods.Gen
         {
             Population turnirSet = new Population(this._GenWorker   );
             
-            int tcount = 2;
+            int tcount = 5;
             int i = 0;
             while (turnirSet.population.Count < tcount)
             {

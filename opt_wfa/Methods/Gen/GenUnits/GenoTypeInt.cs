@@ -1,32 +1,75 @@
 ﻿using opt_wfa.Data_Types;
+
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace opt_wfa.Methods.Gen.GenUnits
+namespace opt_wfa.Methods.Gen.GenFactory
 {
-    public class GenoTypeInt : GenoType
+    public partial class gFactory
     {
-        List<int> genoType = new List<int>();
-        public List<int> GenoType { get { return genoType; } set { genoType = value; } }
-        public Vector GetPhenoType()
+        public abstract class  GenoTypeIntA : GenoType
         {
-            return new Vector(genoType.Count);
+            protected List<int> genoType = new List<int>();
+            protected int phenLength;
+            public List<int> GenoType { get { return genoType; } set { genoType = value; } }
+            
+
+             protected void Coder(double[] massIn)
+            {
+                genoType = new List<int>();//new Vector((_phenotype.length * 12));
+                for (int i = 0; i < phenLength; i++)
+                {
+                    genoType.Add(converter.Decoder(massIn[i]));
+                }
+            }
+
+
+            public Vector GetPhenoType()
+            {
+                return new Vector(Decoder());
+            }
+            public int length { get { return genoType.Count; } }
+
+
+
+
+
+
+             protected double[] Decoder()
+            {
+                double[] massOut = new double[phenLength];
+                for (int i = 0; i < phenLength; i++)
+                {
+
+                    massOut[i] = converter.Coder(this.genoType[i]);
+                }
+                return massOut;
+            }
+            public GenoType Clone()
+            {
+                return new GenoTypeInt(this.Decoder());
+            }
         }
-        public int length { get { return genoType.Count; } }
+    }
+    public static class converter
+    {
+        static double max = 10;
+        static double min = -10;
+        static int genLength = 12;
 
-
-        public GenoType Clone(GenoType old)
+        public static int Decoder(double r)
         {
-            throw new NotImplementedException();
+            double gg = (r - min) * (Math.Pow(2, genLength) - 1) / (max - min);
+            int g = (int)Math.Floor(gg);
+            return g;
         }
 
-
-        public GenoType Clone()
+        public static double Coder(int g)
         {
-            throw new NotImplementedException();
+
+            double r = g * (max - min) / (Math.Pow(2, genLength) - 1) + min;
+            return r;
         }
+
     }
 }

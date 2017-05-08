@@ -1,5 +1,5 @@
 ﻿using opt_wfa.Data_Types;
-using opt_wfa.Methods.Gen.GenUnits;
+using opt_wfa.Methods.Gen.GenFactory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +8,7 @@ namespace opt_wfa.Methods.Gen
 {
     public class Population
     {
+        double _Pc = 0.7;
         GenWorker _GenWorker;//=new GenWorker(new RandomHelper(), 0.1);
         public void Add(Individual item)
         {
@@ -52,7 +53,7 @@ namespace opt_wfa.Methods.Gen
             List<Individual> childP = new List<Individual>();
             List<Individual> ParentWhoNotChildP = new List<Individual>();
             var _random =new RandomHelper();
-           double _Pc = 0.7;
+          
             for (int k = 0; k < this.population.Count; k += 1)
             {
                 int i = 0;
@@ -73,8 +74,12 @@ namespace opt_wfa.Methods.Gen
                     Individual p2 = new Individual(population[j].Genotype);
                     this._GenWorker.Crossover(ref p1, ref p2);
 
-                    childP.Add(this._GenWorker.Mutation(p1));
-                    childP.Add(this._GenWorker.Mutation(p2));
+
+                  
+
+                    childP.Add( this._GenWorker.Inversion(this._GenWorker.Mutation(p1)));
+                    childP.Add(this._GenWorker.Inversion(this._GenWorker.Mutation(p2)));
+
                 }
                 else
                 {

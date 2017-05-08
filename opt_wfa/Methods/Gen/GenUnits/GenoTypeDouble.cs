@@ -1,70 +1,59 @@
 ﻿using opt_wfa.Data_Types;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace opt_wfa.Methods.Gen.GenUnits
+namespace opt_wfa.Methods.Gen.GenFactory
 {
-    public class GenoTypeDouble : GenoType
+   
+    public partial class gFactory
     {
-
-
-        List<double> genoType;
-        int phenLength;
-        int mult = 12;
-        public GenoTypeDouble(double[] massIn)
+        public abstract class GenoTypeDoubleA : GenoType
         {
-            this.phenLength = massIn.Length;
-            //  this.genoType = new List<double>(massIn);
-            Coder(massIn);
+            protected List<double> genoType;
+            protected int phenLength;
+            protected int mult = 12;
 
-        }
-        public List<double> GenoType { get { return genoType; } set { genoType = value; } }
-        public Vector GetPhenoType()
-        {
-            return new Vector(Decoder());
-        }
-        public int length { get { return genoType.Count; } }
-
-
-
-
-        private double[] Decoder()
-        {
-            double[] massOut = new double[phenLength];
-            for (int i = 0; i < phenLength; i++)
+            public List<double> GenoType { get { return genoType; } set { genoType = value; } }
+            public Vector GetPhenoType()
             {
-                for (int j = 0; j < mult; j++)
-                {
-                    massOut[i] += genoType[i * mult + j];
-                }
-                massOut[i] /= mult;
+                return new Vector(Decoder());
             }
-            return massOut;
-        }
-        private void Coder(double[] massIn)
-        {
-            int count = phenLength * mult;
-            genoType = new List<double>();//new Vector((_phenotype.length * 12));
-
-            for (int i = 0; i < phenLength; i++)
+            public int length { get { return genoType.Count; } }
+            protected double[] Decoder()
             {
-                for (int j = 0; j < mult; j++)
+                double[] massOut = new double[phenLength];
+                for (int i = 0; i < phenLength; i++)
                 {
-                    genoType.Add(massIn[i]);
+                    for (int j = 0; j < mult; j++)
+                    {
+                        massOut[i] += genoType[i * mult + j];
+                    }
+                    massOut[i] /= mult;
                 }
-
+                return massOut;
             }
-        }
+            protected void Coder(double[] massIn)
+            {
+                int count = phenLength * mult;
+                genoType = new List<double>();//new Vector((_phenotype.length * 12));
 
+                for (int i = 0; i < phenLength; i++)
+                {
+                    for (int j = 0; j < mult; j++)
+                    {
+                        genoType.Add(massIn[i]);
+                    }
 
-
-
-        public GenoType Clone()
-        {
-            return new GenoTypeDouble(this.Decoder());
+                }
+            }
+            public GenoType Clone()
+            {
+                return new GenoTypeDouble(this.Decoder());
+            }
         }
     }
 }

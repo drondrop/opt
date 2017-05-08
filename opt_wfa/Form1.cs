@@ -64,7 +64,7 @@ namespace opt_wfa
             if (tabControl1.SelectedIndex != 0)
             {
                 var GEN = new GenCore(new opt_wfa.Functions.Test.f11());
-                X0 = GEN.Run();
+                k = GEN.Run(ref X0);
             }
             else
             {

@@ -1,11 +1,24 @@
 ﻿using opt_wfa.Methods.Gen.GenFactory;
-using opt_wfa.Methods.Gen.GenUnits;
+
+
 
 namespace opt_wfa.Methods.Gen.GenFactory
 {
-    
-    public class ConcreteInvertion :GenOperatorBase, IInvertion
+    public partial class gFactory
     {
-        public ConcreteInvertion(IGenOperator _op) : base(_op) { }
+        private class ConcreteInvertion : GenOperatorBase, IInvertion
+        {
+            private double _Pi;
+            public ConcreteInvertion(IGenOperator _op, double _Pi = 0.1)
+                : base(_op)
+            {
+                this._Pi = _Pi;
+            }
+
+            public void Invert(ref Individual individual, Data_Types.RandomHelper _random)
+            {
+                base._GenOperator.Invert(ref individual, _Pi, _random);
+            }
+        }
     }
 }
